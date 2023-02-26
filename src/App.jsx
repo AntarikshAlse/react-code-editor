@@ -61,6 +61,9 @@ function App() {
     user,
     signOut,
   };
+  if (!user) {
+    return <h1 className="font-bold text-lg">Loading...</h1>;
+  }
   return (
     <UserContext.Provider value={value}>
       <Suspense
