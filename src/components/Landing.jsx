@@ -17,34 +17,33 @@ import SideBar from "./SideBar";
 import { useRef } from "react";
 const javascriptDefault = `console.log("Hi");`;
 
-const Landing = () => {
+const Landing = ({ signOut }) => {
   console.count("Landing");
   const { enqueueSnackbar } = useSnackbar();
   const [showSidebar, setShowSidebar] = useState(false);
-  const { signOut, user } = useContext(UserContext);
+  const user = JSON.parse(localStorage.getItem("user"));
   const [code, setCode] = useState(javascriptDefault);
   const [CodeFromFile, setCodeFromFile] = useState("");
   const [folderTree, setFolderTree] = useState({});
-  const [fileInfo, setFileInfo] = useState({
-    file_name: "starterFile",
-    folder_name: "root",
-  });
+  const [fileInfo, setFileInfo] = useState(null);
   const [customInput, setCustomInput] = useState("");
   const [outputDetails, setOutputDetails] = useState(null);
   const [processing, setProcessing] = useState(null);
-  const [theme, setTheme] = useState("cobalt");
+  const [theme, setTheme] = useState({
+    value: "oceanic-next",
+    label: "Oceanic Next",
+  });
   const [language, setLanguage] = useState(languageOptions[0]);
   const ref = useRef(false);
   useEffect(() => {
     // avoids calling the API on every render
-    console.count("useef");
-    if (ref.current) {
-      getBucket();
-      getCode();
-      defineTheme("oceanic-next").then((_) =>
-        setTheme({ value: "oceanic-next", label: "Oceanic Next" })
-      );
-    }
+    // if (ref.current)
+    getBucket();
+    getCode();
+    defineTheme("oceanic-next").then((_) =>
+      setTheme({ value: "oceanic-next", label: "Oceanic Next" })
+    );
+
     return () => {
       ref.current = true;
     };

@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("abc@gmail.com");
+  const [password, setPassword] = useState("123456");
   const [openTab, setOpenTab] = useState(1);
   const handleLogin = async (type) => {
     if ((!username || !password || !email) && type === "SIGNUP") {
@@ -36,7 +36,8 @@ const Login = () => {
               },
             });
       if (user) {
-        navigate("/editor");
+        localStorage.setItem("user", JSON.stringify(user));
+        navigate("/");
       }
       if (error) {
         alert("Error with auth: " + error.message);
