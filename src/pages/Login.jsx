@@ -52,14 +52,15 @@ const Login = () => {
     <div className="w-full h-screen flex justify-center items-center p-4 bg-gray-300">
       <div className="w-full sm:w-1/2 xl:w-1/3">
         <div className="border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg">
+          <h2 className="text-center mb-1 text-lg font-normal">Code Edit</h2>
           <ul className="flex space-x-2 justify-center">
             <li>
               <a
                 href="#"
                 onClick={() => setOpenTab(1)}
                 className={
-                  "inline-block px-4 py-2 text-gray-600 rounded shadow" +
-                  (openTab === 1 ? " bg-gray-400" : "")
+                  "inline-block px-4 py-2  rounded shadow" +
+                  (openTab === 1 ? " bg-green-400" : "")
                 }
               >
                 Login
@@ -70,8 +71,8 @@ const Login = () => {
                 href="#"
                 onClick={() => setOpenTab(2)}
                 className={
-                  "inline-block px-4 py-2 text-gray-600 rounded shadow" +
-                  (openTab === 2 ? " bg-gray-400" : "")
+                  "inline-block px-4 py-2  rounded shadow" +
+                  (openTab === 2 ? " bg-green-400" : "")
                 }
               >
                 Signup
@@ -124,8 +125,7 @@ const Login = () => {
                   e.preventDefault();
                   handleLogin("SIGNUP");
                 }}
-                //href={"/channels"}
-                className="bg-indigo-700 hover:bg-teal text-white py-2 px-4 rounded text-center transition duration-150 hover:bg-indigo-600 hover:text-white"
+                className="bg-green-700 hover:bg-teal text-white py-2 px-4 rounded text-center transition duration-150 hover:bg-green-600 hover:text-white"
               >
                 Sign up
               </a>
@@ -135,8 +135,7 @@ const Login = () => {
                   e.preventDefault();
                   handleLogin("LOGIN");
                 }}
-                //href={"/channels"}
-                className="border border-indigo-700 text-indigo-700 py-2 px-4 rounded w-full text-center transition duration-150 hover:bg-indigo-700 hover:text-white"
+                className="border border-green-700 text-green-700 py-2 px-4 rounded w-full text-center transition duration-150 hover:bg-green-700 hover:text-white"
               >
                 Login
               </a>
