@@ -244,6 +244,29 @@ const Landing = ({ signOut }) => {
       defineTheme(theme.value).then((_) => setTheme(theme));
     }
   }
+  /* Import File */
+  function readFileContent(file) {
+    const reader = new FileReader();
+    return new Promise((resolve, reject) => {
+      reader.onload = (event) => resolve(event.target.result);
+      reader.onerror = (err) => reject(err);
+      reader.readAsText(file);
+    });
+  }
+  const placeFileContent = (file) => {
+    readFileContent(file)
+      .then((content) => {
+        console.log("🚀 ~ file: Landing.jsx:259 ~ .then ~ content:", content);
+        setCodeFromFile(content);
+      })
+      .catch((err) => console.log(err));
+  };
+  const importFile = (e) => {
+    const input = e.target;
+    if ("files" in input && input.files.length > 0) {
+      placeFileContent(input.files[0]);
+    }
+  };
   return (
     <>
       <div className="h-12 w-full  flex justify-end mr-6 bg-blue-400">
@@ -252,6 +275,26 @@ const Landing = ({ signOut }) => {
             {fileInfo &&
               "File: " + fileInfo.folder_name + "/" + fileInfo.file_name}
           </h4>
+          <label
+            className="flex gap-3 items-center bg-white border-black border-1 hover:cursor-pointer hover:scale-105 rounded-md my-1 px-2 py-1"
+            htmlFor="codefile"
+          >
+            <input
+              className="hidden"
+              type="file"
+              accept="."
+              id="codefile"
+              onChange={(e) => importFile(e)}
+            />
+            Import Code
+          </label>
+          <a
+            className="flex gap-3 items-center  bg-white border-black border-1 hover:cursor-pointer hover:scale-105 rounded-md my-1 px-2 py-1"
+            href={`data:text/plain;charset=utf-8,${encodeURIComponent(code)}`}
+            download={`EditorCode-${new Date().toLocaleDateString()}.txt`}
+          >
+            Export Code
+          </a>
           <button
             onClick={() => {
               let base64Code = window.btoa(code);
